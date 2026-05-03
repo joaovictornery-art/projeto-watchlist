@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Cinema Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Lista de Cinema Online</h1>
+    <p class="site-author">por Johnny</p>
+
+    <section>
+      <h2>Adicionar filme ou série</h2>
+
+      <form id="watchlist-form">
+        <label for="title">Título</label>
+        <input type="text" id="title" name="title" placeholder="Ex: Interestelar">
+
+        <label for="type">Tipo</label>
+        <select id="type" name="type">
+          <option value="filme">Filme</option>
+          <option value="serie">Série</option>
+        </select>
+
+        <button type="submit">Adicionar</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Minha lista</h2>
+
+      <div class="filter-group filter-group-type">
+        <button type="button" id="filter-movies" >Filmes</button>
+        <button type="button" id="filter-series" >Séries</button>
+      </div>
+
+      <div class="filter-group filter-group-status">
+        <button type="button" id="filter-all" >Todos</button>
+        <button type="button" id="filter-watch" >Quero assistir</button>
+        <button type="button" id="filter-watched" >Assistidos</button>
+      </div>
+
+      <ul id="watchlist"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
