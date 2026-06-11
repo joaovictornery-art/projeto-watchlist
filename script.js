@@ -158,6 +158,42 @@ function renderItems() {
       renderItems();
     });
 
+    const editButton = document.createElement("button");
+    editButton.textContent = "Editar";
+
+    editButton.addEventListener("click", function () {
+      const newTitle = prompt("Digite o novo título:", savedItem.title);
+
+      if (newTitle === null) {
+        return;
+      }
+
+      const trimmedTitle = newTitle.trim();
+
+      if (trimmedTitle === "") {
+        alert("Digite um título válido para editar");
+        return;
+      }
+
+      const newType = prompt("Digite o novo tipo: filme ou serie.", savedItem.type);
+
+      if (newType === null) {
+        return;
+      }
+
+      const normalizedType = newType.trim().toLowerCase().replace("é", "e");
+
+      if (normalizedType !== "filme" && normalizedType !== "serie") {
+        alert("Digite um tipo válido: filme ou serie");
+        return;
+      }
+
+      savedItem.title = trimmedTitle;
+      savedItem.type = normalizedType;
+      saveItems();
+      renderItems();
+    });
+
     const ratingButton = document.createElement("button");
     ratingButton.textContent = "Dar nota";
 
@@ -181,6 +217,7 @@ function renderItems() {
       item.appendChild(watchedButton);
     }
 
+    item.appendChild(editButton);
     item.appendChild(removeButton);
     item.appendChild(ratingButton);
     watchlist.appendChild(item);

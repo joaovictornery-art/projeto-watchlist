@@ -6,6 +6,7 @@ Aplicação simples para organizar filmes e séries que quero assistir ou que j�
 
 - Adiciona filmes ou séries à lista.
 - Marca títulos como assistidos.
+- Edita o título e o tipo de um item salvo.
 - Permite dar nota de 0 a 10.
 - Remove títulos da lista.
 - Filtra por tipo: todos, filmes ou séries.
@@ -37,7 +38,6 @@ http://localhost:8000
 
 ## Próximos passos possíveis
 
-- Editar um título já cadastrado.
 - Separar melhor títulos assistidos e títulos para assistir.
 - Criar uma busca por texto.
 - Evoluir futuramente para login, backend ou recomendações com IA.

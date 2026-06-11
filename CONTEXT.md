@@ -20,6 +20,10 @@ _Avoid_: Estado
 Uma escolha temporária de visualização que limita os **Títulos** mostrados por **Tipo** ou **Status de visualização**, sem removê-los da Watchlist.
 _Avoid_: Lista separada
 
+**Edição**:
+Uma alteração feita em um **Título** já salvo, mantendo o mesmo registro na Watchlist.
+_Avoid_: Recriação
+
 ## Example Dialogue
 
 **Pessoa**: Quero ver todos os títulos que salvei na minha Watchlist.
