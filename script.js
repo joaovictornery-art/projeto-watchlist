@@ -1,6 +1,7 @@
 const form = document.querySelector("#watchlist-form");
 const titleInput = document.querySelector("#title");
 const typeInput = document.querySelector("#type");
+const searchInput = document.querySelector("#search");
 const watchlist = document.querySelector("#watchlist");
 const filterAllButton = document.querySelector("#filter-all");
 const filterWatchButton = document.querySelector("#filter-watch");
@@ -12,6 +13,7 @@ const filterSeriesButton = document.querySelector("#filter-series");
 let items = [];
 let currentTypeFilter = "all";
 let currentStatusFilter = "all";
+let currentSearch = "";
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -69,6 +71,11 @@ filterSeriesButton.addEventListener("click", function () {
   renderItems();
 });
 
+searchInput.addEventListener("input", function () {
+  currentSearch = searchInput.value.trim().toLowerCase();
+  renderItems();
+});
+
 function saveItems() {
   localStorage.setItem("watchlist", JSON.stringify(items));
 }
@@ -85,21 +92,7 @@ function renderItems() {
   watchlist.innerHTML = "";
   updateFilterButtons();
 
-  const visibleItems = items.filter(function (savedItem) {
-    if (currentTypeFilter !== "all" && savedItem.type !== currentTypeFilter) {
-      return false;
-    }
-
-    if (currentStatusFilter === "watch" && savedItem.watched === true) {
-      return false;
-    }
-
-    if (currentStatusFilter === "watched" && savedItem.watched === false) {
-      return false;
-    }
-
-    return true;
-  });
+  const visibleItems = items.filter(itemMatchesCurrentView);
 
   if (visibleItems.length === 0) {
     const emptyMessage = document.createElement("li");
@@ -112,15 +105,11 @@ function renderItems() {
   }
 
   items.forEach(function (savedItem, index) {
-    if (currentTypeFilter !== "all" && savedItem.type !== currentTypeFilter) {
+    if (itemMatchesCurrentView(savedItem) === false) {
       return;
     }
 
-    if (currentStatusFilter === "watch" && savedItem.watched === true) {
-      return;
-    }
-
-    if (currentStatusFilter === "watched" && savedItem.watched === false) {
+    if (currentSearch !== "" && savedItem.title.toLowerCase().includes(currentSearch) === false) {
       return;
     }
 
@@ -141,10 +130,12 @@ function renderItems() {
     itemText.textContent = `${itemDescription} `;
 
     const watchedButton = document.createElement("button");
-    watchedButton.textContent = "Marcar como assistido";
+    watchedButton.textContent = savedItem.watched === true
+      ? "Marcar como quero assistir"
+      : "Marcar como assistido";
 
     watchedButton.addEventListener("click", function () {
-      savedItem.watched = true;
+      savedItem.watched = !savedItem.watched;
       saveItems();
       renderItems();
     });
@@ -213,15 +204,32 @@ function renderItems() {
 
     item.appendChild(itemText);
 
-    if (savedItem.watched === false) {
-      item.appendChild(watchedButton);
-    }
-
+    item.appendChild(watchedButton);
     item.appendChild(editButton);
     item.appendChild(removeButton);
     item.appendChild(ratingButton);
     watchlist.appendChild(item);
   });
+}
+
+function itemMatchesCurrentView(savedItem) {
+  if (currentTypeFilter !== "all" && savedItem.type !== currentTypeFilter) {
+    return false;
+  }
+
+  if (currentStatusFilter === "watch" && savedItem.watched === true) {
+    return false;
+  }
+
+  if (currentStatusFilter === "watched" && savedItem.watched === false) {
+    return false;
+  }
+
+  if (currentSearch !== "" && savedItem.title.toLowerCase().includes(currentSearch) === false) {
+    return false;
+  }
+
+  return true;
 }
 
 function updateFilterButtons() {

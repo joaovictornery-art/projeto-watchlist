@@ -20,6 +20,10 @@ _Avoid_: Estado
 Uma escolha temporária de visualização que limita os **Títulos** mostrados por **Tipo** ou **Status de visualização**, sem removê-los da Watchlist.
 _Avoid_: Lista separada
 
+**Busca**:
+Uma forma de localizar **Títulos** pelo texto do nome, sem alterar os dados salvos.
+_Avoid_: Filtro definitivo
+
 **Edição**:
 Uma alteração feita em um **Título** já salvo, mantendo o mesmo registro na Watchlist.
 _Avoid_: Recriação

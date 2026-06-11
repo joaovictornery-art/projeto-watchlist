@@ -9,8 +9,10 @@ Aplicação simples para organizar filmes e séries que quero assistir ou que j�
 - Edita o título e o tipo de um item salvo.
 - Permite dar nota de 0 a 10.
 - Remove títulos da lista.
+- Busca títulos pelo nome.
 - Filtra por tipo: todos, filmes ou séries.
 - Filtra por status: todos, quero assistir ou assistidos.
+- Alterna um título entre quero assistir e assistido.
 - Salva os dados no navegador com `localStorage`.
 
 ## Como abrir localmente
@@ -39,5 +41,4 @@ http://localhost:8000
 ## Próximos passos possíveis
 
 - Separar melhor títulos assistidos e títulos para assistir.
-- Criar uma busca por texto.
 - Evoluir futuramente para login, backend ou recomendações com IA.
