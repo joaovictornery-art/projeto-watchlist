@@ -5,11 +5,12 @@ const watchlist = document.querySelector("#watchlist");
 const filterAllButton = document.querySelector("#filter-all");
 const filterWatchButton = document.querySelector("#filter-watch");
 const filterWatchedButton = document.querySelector("#filter-watched");
+const filterAllTypesButton = document.querySelector("#filter-all-types");
 const filterMoviesButton = document.querySelector("#filter-movies");
 const filterSeriesButton = document.querySelector("#filter-series");
 
 let items = [];
-let currentTypeFilter = "filme";
+let currentTypeFilter = "all";
 let currentStatusFilter = "all";
 
 form.addEventListener("submit", function (event) {
@@ -53,6 +54,11 @@ filterWatchedButton.addEventListener("click", function () {
   renderItems();
 });
 
+filterAllTypesButton.addEventListener("click", function () {
+  currentTypeFilter = "all";
+  renderItems();
+});
+
 filterMoviesButton.addEventListener("click", function () {
   currentTypeFilter = "filme";
   renderItems();
@@ -79,8 +85,34 @@ function renderItems() {
   watchlist.innerHTML = "";
   updateFilterButtons();
 
+  const visibleItems = items.filter(function (savedItem) {
+    if (currentTypeFilter !== "all" && savedItem.type !== currentTypeFilter) {
+      return false;
+    }
+
+    if (currentStatusFilter === "watch" && savedItem.watched === true) {
+      return false;
+    }
+
+    if (currentStatusFilter === "watched" && savedItem.watched === false) {
+      return false;
+    }
+
+    return true;
+  });
+
+  if (visibleItems.length === 0) {
+    const emptyMessage = document.createElement("li");
+    emptyMessage.className = "empty-message";
+    emptyMessage.textContent = items.length === 0
+      ? "Sua lista ainda está vazia. Adicione um filme ou série para começar."
+      : "Nenhum título encontrado para os filtros selecionados.";
+    watchlist.appendChild(emptyMessage);
+    return;
+  }
+
   items.forEach(function (savedItem, index) {
-    if (savedItem.type !== currentTypeFilter) {
+    if (currentTypeFilter !== "all" && savedItem.type !== currentTypeFilter) {
       return;
     }
 
@@ -156,6 +188,7 @@ function renderItems() {
 }
 
 function updateFilterButtons() {
+  filterAllTypesButton.classList.toggle("active", currentTypeFilter === "all");
   filterMoviesButton.classList.toggle("active", currentTypeFilter === "filme");
   filterSeriesButton.classList.toggle("active", currentTypeFilter === "serie");
   filterAllButton.classList.toggle("active", currentStatusFilter === "all");

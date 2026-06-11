@@ -31,12 +31,15 @@
     <section>
       <h2>Minha lista</h2>
 
-      <div class="filter-group filter-group-type">
+      <p class="filter-label">Filtrar por tipo</p>
+      <div class="filter-group filter-group-type" aria-label="Filtrar por tipo">
+        <button type="button" id="filter-all-types">Todos</button>
         <button type="button" id="filter-movies">Filmes</button>
         <button type="button" id="filter-series">Séries</button>
       </div>
 
-      <div class="filter-group filter-group-status">
+      <p class="filter-label">Filtrar por status</p>
+      <div class="filter-group filter-group-status" aria-label="Filtrar por status">
         <button type="button" id="filter-all">Todos</button>
         <button type="button" id="filter-watch">Quero assistir</button>
         <button type="button" id="filter-watched">Assistidos</button>
